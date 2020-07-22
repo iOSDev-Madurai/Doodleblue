@@ -1,0 +1,61 @@
+{
+  "attributes": [
+    {
+      "attributeId": "One",
+      "modifiedLabel": "Option One",
+      "tag": "select",
+      "optionValueList": [
+        {
+          "optionId": "VALUE_One",
+          "optionObject": "This is the third sentence"
+        },
+        {
+          "optionId": "VALUE_Two",
+          "optionObject": "This is the second sentence"
+        },
+        {
+          "optionId": "VALUE_Three",
+          "optionObject": "This is first sentence"
+        }
+      ]
+    },
+    {
+      "attributeId": "Two",
+      "modifiedLabel": "Option Two",
+      "tag": "select",
+      "optionValueList": [
+        {
+          "optionId": "VALUE_One",
+          "optionObject": "This is the third sentence"
+        },
+        {
+          "optionId": "VALUE_Two",
+          "optionObject": "This is the second sentence"
+        },
+        {
+          "optionId": "VALUE_Three",
+          "optionObject": "This is first sentence"
+        }
+      ]
+    },
+    {
+      "attributeId": "Three",
+      "modifiedLabel": "Option Three",
+      "tag": "select",
+      "optionValueList": [
+        {
+          "optionId": "VALUE_One",
+          "optionObject": "This is the third sentence"
+        },
+        {
+          "optionId": "VALUE_Two",
+          "optionObject": "This is the second sentence,"
+        },
+        {
+          "optionId": "VALUE_Three",
+          "optionObject": "This is first sentence"
+        }
+      ]
+    }
+  ]
+}
