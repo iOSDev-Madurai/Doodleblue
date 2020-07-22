@@ -17,8 +17,10 @@ class Section {
     }
 
     private(set) lazy var attributes: [Attribute] = {
-        guard let attributes = jsonDic[JSONConstants.Key.attributes] as? [[String: Any]] else {
-            return [Attribute]()
+        guard
+            let attributes = jsonDic[JSONConstants.Key.attributes] as? [[String: Any]]
+            else {
+                return [Attribute]()
         }
         return attributes.map { (dic) -> Attribute in
             return Attribute(withDic: dic)

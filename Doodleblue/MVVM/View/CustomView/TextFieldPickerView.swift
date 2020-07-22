@@ -13,9 +13,8 @@ class TextFieldPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     // This Property
     private var textField: UITextField!
     private var textFieldDelegate: TextFieldPickerDelegate!
-    private var attribute: Attribute!
     private var selectedPickerValue: OptionValue?
-    private var keyboardDoneButtonView: UIToolbar {
+    private var keyboardToolBar: UIToolbar {
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35))
         toolBar.sizeToFit()
         toolBar.barStyle = .blackTranslucent
@@ -25,6 +24,11 @@ class TextFieldPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
         let cancel = UIBarButtonItem(title: Constants.cancel, style: .done, target: self, action: #selector(self.cancelButtonTouched))
         toolBar.setItems([cancel, flexibleSpace,done], animated: true)
         return toolBar
+    }
+    var options: [OptionValue]! {
+        didSet {
+            reloadData()
+        }
     }
 
     // MARK: - init
@@ -36,10 +40,9 @@ class TextFieldPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
 
         textField                       = txtField
         textFieldDelegate               = textDelegate
-        textField.inputAccessoryView    = keyboardDoneButtonView
-        attribute                       = info
-        delegate                        = self
-        dataSource                      = self
+        textField.inputAccessoryView    = keyboardToolBar
+        options                         = info.options
+        reloadData()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -52,7 +55,7 @@ class TextFieldPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
 
         textField.resignFirstResponder()
         guard
-            let pickerValue = selectedPickerValue ?? attribute.options.first
+            let pickerValue = selectedPickerValue ?? options.first
             else {
                 return
         }
@@ -66,23 +69,40 @@ class TextFieldPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     
     // MARK:- UIPickerViewDelegate
 
+    private func reloadData() {
+
+        if delegate == nil || dataSource == nil {
+            delegate                        = self
+            dataSource                      = self
+        }
+        reloadAllComponents()
+    }
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return attribute.options.count
+        return options.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
-        guard let pickerValue = attribute.options[safe: row] else { return nil }
+        guard
+            let pickerValue = options[safe: row]
+            else {
+                return nil
+        }
         return pickerValue.name
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
-        guard let pickerValue = attribute.options[safe: row] else { return }
+        guard
+            let pickerValue = options[safe: row]
+            else {
+                return
+        }
         selectedPickerValue = pickerValue
     }
 

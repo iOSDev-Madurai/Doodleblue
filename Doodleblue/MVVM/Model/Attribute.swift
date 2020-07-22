@@ -17,15 +17,15 @@ class Attribute {
     }
     
     lazy var id: String = {
-        return jsonDic[JSONConstants.Key.attributeId] as? String ?? ""
+        return jsonDic[JSONConstants.Key.attributeId] as? String ?? Constants.empty
     }()
     
     lazy var label: String = {
-        return jsonDic[JSONConstants.Key.modifiedLabel] as? String ?? ""
+        return jsonDic[JSONConstants.Key.modifiedLabel] as? String ?? Constants.empty
     }()
     
     lazy var tag: String = {
-        return jsonDic[JSONConstants.Key.tag] as? String ?? ""
+        return jsonDic[JSONConstants.Key.tag] as? String ?? Constants.empty
     }()
 
     private lazy var dataList: [OptionValue] = {
@@ -40,7 +40,11 @@ class Attribute {
     }()
 
     var options: [OptionValue] {
-        guard let dependent = dependentAttributes else { return dataList }
+        guard
+            let dependent = dependentAttributes
+            else {
+                return dataList
+        }
         let filteredData = dataList.filter { (option) -> Bool in
             guard let _ = dependent.first(where: { (attribute) -> Bool in
                 guard let selected = attribute.selectedData else {
@@ -54,6 +58,7 @@ class Attribute {
         }
         return filteredData
     }
+
     weak var selectedData: OptionValue?
     var dependentAttributes: [Attribute]?
 

@@ -36,4 +36,5 @@ struct Constants {
     static let done = "Done"
     static let cancel = "Cancel"
     static let json = "json"
+    static let empty = ""
 }

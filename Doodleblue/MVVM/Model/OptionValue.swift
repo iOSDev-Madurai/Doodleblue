@@ -17,11 +17,11 @@ class OptionValue {
     }
 
     private(set) lazy var id: String = {
-        return jsonDic[JSONConstants.Key.optionId] as? String ?? ""
+        return jsonDic[JSONConstants.Key.optionId] as? String ?? Constants.empty
     }()
 
     private(set) lazy var name: String = {
-        return jsonDic[JSONConstants.Key.optionObject] as? String ?? ""
+        return jsonDic[JSONConstants.Key.optionObject] as? String ?? Constants.empty
     }()
 
 }

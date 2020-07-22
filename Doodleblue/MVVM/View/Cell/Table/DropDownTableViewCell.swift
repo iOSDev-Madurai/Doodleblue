@@ -59,11 +59,12 @@ class DropDownTableViewCell: UITableViewCell, TextFieldPickerDelegate, UITextFie
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
          guard
-            let pickerView = textField.inputView as? TextFieldPickerView
+            let pickerView = textField.inputView as? TextFieldPickerView,
+            let attribute = attribute
             else {
                 return
         }
-        pickerView.reloadAllComponents()
+        pickerView.options = attribute.options
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
